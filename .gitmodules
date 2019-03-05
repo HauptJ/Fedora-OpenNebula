@@ -1,0 +1,6 @@
+[submodule "roles/mariadb"]
+	path = roles/mariadb
+	url = git@github.com:HauptJ/ansible-role-mariadb-1.git
+[submodule "roles/selinux"]
+	path = roles/selinux
+	url = git@github.com:HauptJ/ansible-role-selinux.git

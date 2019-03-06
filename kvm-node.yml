@@ -1,0 +1,21 @@
+---
+- name: Provision OpenNebula KVM Node on CentOS
+  hosts: kvm-node
+  become: yes
+  strategy: debug
+
+  roles:
+
+    - role: selinux
+      become: yes
+      tags: selinux
+
+    - role: repo
+      become: yes
+      tags: repo
+
+    - role: kvm-node
+      become: yes
+      tags: kvm-node
+
+    

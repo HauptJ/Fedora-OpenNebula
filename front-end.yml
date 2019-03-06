@@ -1,6 +1,6 @@
 ---
-- name: Provision Laptop with OpenNebula
-  hosts: local
+- name: Provision OpenNebula Front End on CentOS
+  hosts: front-end
   become: yes
   strategy: debug
 
@@ -9,6 +9,10 @@
     - role: selinux
       become: yes
       tags: selinux
+
+    - role: repo
+      become: yes
+      tags: repo
       
     - role: mariadb
       become: yes

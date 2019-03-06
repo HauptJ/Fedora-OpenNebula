@@ -1,14 +1,5 @@
 ---
 
-- name: Add OpenNebula repository
-  yum_repository:
-    name: opennebula
-    description: opennebula
-    baseurl: https://downloads.opennebula.org/repo/5.7/CentOS/7/x86_64
-    enabled: yes
-    gpgkey: https://downloads.opennebula.org/repo/repo.key
-    gpgcheck: yes
-
 - name: Ensure Ruby runtime dependency libraries are installed
   yum:
     name:

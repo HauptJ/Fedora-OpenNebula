@@ -1,0 +1,12 @@
+---
+
+- name: Restart opennebula
+  systemd:
+    name: opennebula
+    state: restarted
+  notify: Restart opennebula-sunstone
+
+- name: Restart opennebula-sunstone
+  systemd:
+    name: opennebula-sunstone
+    state: restarted

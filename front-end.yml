@@ -1,0 +1,25 @@
+---
+- name: Provision OpenNebula Front End on CentOS
+  hosts: front-end
+  become: yes
+  strategy: debug
+
+  roles:
+
+    - role: selinux
+      become: yes
+      tags: selinux
+
+    - role: repo
+      become: yes
+      tags: repo
+      
+    - role: mariadb
+      become: yes
+      tags: mariadb
+
+    - role: front-end
+      become: yes
+      tags: front-end
+
+    

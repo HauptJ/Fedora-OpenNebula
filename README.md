@@ -1,2 +1,2 @@
-# Fedora-OpenNebula
-OpenNebula on Fedora
+# OpenNebula
+OpenNebula Ansible playbook

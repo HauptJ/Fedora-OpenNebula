@@ -1,0 +1,14 @@
+mariadb_root_password: ***REMOVED***
+
+opennebula_db_host: localhost
+opennebula_db_user: oneadmin
+opennebula_db_user_pass: ***REMOVED***
+opennebula_db_name: opennebula
+
+mariadb_databases:
+  - name: "{{ opennebula_db_name }}"
+
+mariadb_users: 
+  - name: "{{ opennebula_db_user }}"
+  - password: "{{ opennebula_db_user_pass }}"
+  - priv: '{{ opennebula_db_name }}.*:ALL'

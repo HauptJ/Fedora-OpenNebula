@@ -1,0 +1,55 @@
+---
+
+- name: Ensure Ruby runtime dependency libraries are installed
+  yum:
+    name:
+      - ruby
+      - ruby-devel
+      - rubygem-rake
+      - sqlite
+      - sqlite-devel
+      - sqlite-tcl
+      - sqlite-jdbc
+      - libcurl
+      - libcurl-devel
+      - libxml2
+      - libxml2-devel
+      - libxslt-devel
+      - gcc
+      - gcc-c++
+      - make
+      - expat-devel
+    state: present
+
+- name: Install OpenNebula Packages
+  yum:
+    name:
+      - opennebula-server
+      - opennebula-sunstone
+      - opennebula-ruby
+      - opennebula-gate
+      - opennebula-flow
+    state: present
+
+- name: Install Ruby Gems
+  shell: yes | /usr/share/one/install_gems
+
+- name: Copy oneadmin config
+  template:
+    src: oned.conf
+    dest: /etc/one/oned.conf
+    backup: yes
+
+
+- name: Enable and start opennebula service
+  systemd:
+    name: opennebula
+    state: started
+    enabled: yes
+
+- name: Enable and start opennebula-sunstone service
+  systemd:
+    name: opennebula-sunstone
+    state: started
+    enabled: yes
+    notify: Restart opennebula

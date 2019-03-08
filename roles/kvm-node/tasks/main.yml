@@ -1,0 +1,23 @@
+---
+
+- name: Install OpenNebula Node Package
+  yum:
+    name:
+      - opennebula-node-kvm
+    state: present
+
+- name: Restart libvirtd
+  systemd:
+    name: libvirtd
+    state: restarted
+
+- name: Install centos-release-qemu-ev
+  yum:
+    name: centos-release-qemu-ev
+    state: present
+  
+- name: Install QEMU
+  yum:
+    name:
+      - qemu-kvm-ev
+    state: latest

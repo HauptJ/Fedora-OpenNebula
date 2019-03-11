@@ -1,6 +1,9 @@
 [submodule "roles/mariadb"]
 	path = roles/mariadb
-	url = git@github.com:HauptJ/ansible-role-mariadb-1.git
+	url = https://github.com/HauptJ/ansible-role-mariadb-1.git
 [submodule "roles/selinux"]
 	path = roles/selinux
-	url = git@github.com:HauptJ/ansible-role-selinux.git
+	url = https://github.com/HauptJ/ansible-role-selinux.git
+[submodule ".\\roles\\epel"]
+	path = .\\roles\\epel
+	url = https://github.com/HauptJ/ansible-role-repo-epel.git

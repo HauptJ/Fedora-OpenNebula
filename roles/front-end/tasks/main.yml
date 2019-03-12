@@ -1,0 +1,68 @@
+---
+
+- name: Ensure Ruby runtime dependency libraries are installed
+  yum:
+    name:
+      - gcc
+      - rubygem-rake
+      - libxml2-devel
+      - libxslt-devel
+      - patch
+      - gcc-c++
+      - sqlite-devel
+      - curl-devel
+      - MariaDB-devel
+      - MariaDB-shared
+      - openssl-devel
+      - ruby-devel
+      - make
+    state: present
+
+- name: MAKE SURE MariaDB-shared is installed
+  yum:
+    name: MariaDB-shared
+    state: latest
+
+- name: MAKE SURE bundler gem is installed
+  gem:
+    name: bundler
+    state: latest
+
+- name: Install OpenNebula Packages
+  yum:
+    name:
+      - opennebula-server
+      - opennebula-sunstone
+      - opennebula-ruby
+      - opennebula-gate
+      - opennebula-flow
+    state: present
+
+- name: Install Ruby Gems
+  shell: yes | /usr/share/one/install_gems
+
+- name: Copy oneadmin config
+  template:
+    src: oned.conf
+    dest: /etc/one/oned.conf
+    backup: yes
+
+- name: Copy oneadmin user ssh config
+  template: 
+    src: oneadmin_ssh_config
+    dest: /var/lib/one/.ssh/config
+    owner: oneadmin
+    mode: 600
+
+- name: Enable and start opennebula service
+  systemd:
+    name: opennebula
+    state: started
+    enabled: yes
+
+- name: Enable and start opennebula-sunstone service
+  systemd:
+    name: opennebula-sunstone
+    state: started
+    enabled: yes
+    notify: Restart opennebula

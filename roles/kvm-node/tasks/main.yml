@@ -1,0 +1,33 @@
+---
+
+- name: Install OpenNebula Node Package
+  yum:
+    name:
+      - opennebula-node-kvm
+    state: present
+
+- name: Restart libvirtd
+  systemd:
+    name: libvirtd
+    state: restarted
+
+- name: Install centos-release-qemu-ev
+  yum:
+    name: centos-release-qemu-ev
+    state: present
+  
+- name: Install QEMU
+  yum:
+    name:
+      - qemu-kvm-ev
+    state: latest
+
+- name: Enable and start Libvirt and messagebus
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - messagebus.service
+    - libvirtd.service
+

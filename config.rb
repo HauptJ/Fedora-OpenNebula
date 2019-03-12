@@ -3,8 +3,8 @@
 # If you wish to use another Vagrant box, you will have to uncomment the
 # commented out commands. See: Vagrantfile
 
-$centos_box = "hauptj/CentOS76lite"
-$centos_box_ver = "1.0.2"
+$centos_box = "hauptj/CentOS76Lite"
+$centos_box_ver = "1.0.3"
 $ssh_user = "root"
 
 $opennebula_master_vmname = "opennebula_master"

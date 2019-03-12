@@ -10,10 +10,13 @@
       become: yes
       tags: selinux
 
+<<<<<<< HEAD
     - role: epel
       become: yes
       tags: epel
 
+=======
+>>>>>>> 1f2e5d596ccc27400c5b266f83fccdda89cb9aaf
     - role: repo
       become: yes
       tags: repo
@@ -22,10 +25,13 @@
       become: yes
       tags: mariadb
 
+<<<<<<< HEAD
     - role: ruby
       become: yes
       tags: ruby
 
+=======
+>>>>>>> 1f2e5d596ccc27400c5b266f83fccdda89cb9aaf
     - role: front-end
       become: yes
       tags: front-end

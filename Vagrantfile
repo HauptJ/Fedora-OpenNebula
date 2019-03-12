@@ -105,7 +105,7 @@ Vagrant.configure("2") do |config|
       # Mac Address
       hv.mac = $opennebula_master_mac
       # Faster cloning and uses less disk space
-      hv.differencing_disk = true
+      hv.linked_clone = true
   	end
 
     opennebula_master.vm.provision "shell", inline: <<-SHELL
@@ -136,7 +136,7 @@ Vagrant.configure("2") do |config|
       # Mac Address
       hv.mac = $opennebula_node_mac
       # Faster cloning and uses less disk space
-      hv.differencing_disk = true
+      hv.linked_clone = true
   	end
 
     opennebula_node.vm.provision "shell", inline: <<-SHELL

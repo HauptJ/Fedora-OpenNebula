@@ -3,23 +3,30 @@
 - name: Ensure Ruby runtime dependency libraries are installed
   yum:
     name:
-      - ruby
-      - ruby-devel
+      - gcc
       - rubygem-rake
-      - sqlite
-      - sqlite-devel
-      - sqlite-tcl
-      - sqlite-jdbc
-      - libcurl
-      - libcurl-devel
-      - libxml2
       - libxml2-devel
       - libxslt-devel
-      - gcc
+      - patch
       - gcc-c++
+      - sqlite-devel
+      - curl-devel
+      - MariaDB-devel
+      - MariaDB-shared
+      - openssl-devel
+      - ruby-devel
       - make
-      - expat-devel
     state: present
+
+- name: MAKE SURE MariaDB-shared is installed
+  yum:
+    name: MariaDB-shared
+    state: latest
+
+- name: MAKE SURE bundler gem is installed
+  gem:
+    name: bundler
+    state: latest
 
 - name: Install OpenNebula Packages
   yum:

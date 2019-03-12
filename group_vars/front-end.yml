@@ -1,14 +1,16 @@
-mariadb_root_password: the_electron_went_moo_moo_moo_all_the_way_home
+mariadb_root_password: password
 
 opennebula_db_host: localhost
 opennebula_db_user: oneadmin
-opennebula_db_user_pass: 1@mGr00t!
+opennebula_db_user_pass: password
 opennebula_db_name: opennebula
+
+ruby_install_from_source: true
 
 mariadb_databases:
   - name: "{{ opennebula_db_name }}"
 
 mariadb_users: 
   - name: "{{ opennebula_db_user }}"
-  - password: "{{ opennebula_db_user_pass }}"
-  - priv: '{{ opennebula_db_name }}.*:ALL'
+    password: "{{ opennebula_db_user_pass }}"
+    priv: '{{ opennebula_db_name }}.*:ALL'

@@ -7,3 +7,6 @@
 [submodule ".\\roles\\selinux"]
 	path = .\\roles\\selinux
 	url = https://github.com/HauptJ/ansible-role-selinux.git
+[submodule ".\\roles\\ruby"]
+	path = .\\roles\\ruby
+	url = https://github.com/HauptJ/ansible-role-ruby.git

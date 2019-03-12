@@ -115,7 +115,7 @@ Vagrant.configure("2") do |config|
     cp deploy.vault ~/deploy.vault
     chmod -x ~/deploy.vault
     ansible-playbook front-end.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
-    # ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
+    ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
     popd
     chown -R vagrant:vagrant /vagrant
     SHELL

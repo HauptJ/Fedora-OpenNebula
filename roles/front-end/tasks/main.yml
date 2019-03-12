@@ -47,6 +47,12 @@
     dest: /etc/one/oned.conf
     backup: yes
 
+- name: Copy oneadmin user ssh config
+  template: 
+    src: oneadmin_ssh_config
+    dest: /var/lib/one/.ssh/config
+    owner: oneadmin
+    mode: 600
 
 - name: Enable and start opennebula service
   systemd:

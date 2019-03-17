@@ -109,13 +109,12 @@ Vagrant.configure("2") do |config|
   	end
 
     opennebula_master.vm.provision "shell", inline: <<-SHELL
-    # Install Dependencies from Ansible Galaxy
     pushd /vagrant
     # Run Ansible Playbook
     cp deploy.vault ~/deploy.vault
     chmod -x ~/deploy.vault
     ansible-playbook front-end.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
-    ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
+    ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux,vnet"
     popd
     chown -R vagrant:vagrant /vagrant
     SHELL
@@ -140,12 +139,11 @@ Vagrant.configure("2") do |config|
   	end
 
     opennebula_node.vm.provision "shell", inline: <<-SHELL
-    # Install Dependencies from Ansible Galaxy
     pushd /vagrant
     # Run Ansible Playbook
     cp deploy.vault ~/deploy.vault
     chmod -x ~/deploy.vault
-    ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux"
+    ansible-playbook kvm-node.yml --vault-password-file ~/deploy.vault --skip-tags "selinux,vnet"
     popd
     chown -R vagrant:vagrant /vagrant
     SHELL

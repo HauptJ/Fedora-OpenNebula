@@ -18,15 +18,28 @@
       - make
     state: present
 
+### TODO Replace this duct tape and hot glue fix ###
+
 - name: MAKE SURE MariaDB-shared is installed
   yum:
     name: MariaDB-shared
     state: latest
 
+- name: MAKE SURE MariaDB-shared is installed again
+  shell: yum install -y MariaDB-shared
+  ignore_errors: yes
+
 - name: MAKE SURE bundler gem is installed
   gem:
     name: bundler
     state: latest
+  ignore_errors: yes
+
+- name: Install mysql2 gem
+  shell: gem install mysql2 -v '0.5.2' --source 'https://rubygems.org/'
+  ignore_errors: yes
+
+### TODO Replace this duct tape and hot glue fix ###
 
 - name: Install OpenNebula Packages
   yum:
@@ -36,10 +49,11 @@
       - opennebula-ruby
       - opennebula-gate
       - opennebula-flow
-    state: present
+    state: latest
 
 - name: Install Ruby Gems
   shell: yes | /usr/share/one/install_gems
+  ignore_errors: yes
 
 - name: Copy oneadmin config
   template:
@@ -54,6 +68,15 @@
     owner: oneadmin
     mode: 600
 
+- name: Set oneadmin password
+  lineinfile:
+    path: /home/oneadmin/.one/one_auth
+    regexp: '^oneadmin:'
+    line: "{{ oneadmin_pass }}"
+    owner: oneadmin
+    group: oneadmin
+    create: yes
+
 - name: Enable and start opennebula service
   systemd:
     name: opennebula
@@ -65,4 +88,4 @@
     name: opennebula-sunstone
     state: started
     enabled: yes
-    notify: Restart opennebula
+  notify: Restart opennebula

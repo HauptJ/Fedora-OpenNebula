@@ -1,3 +1,5 @@
+oneadmin_pass: password
+
 mariadb_root_password: password
 
 opennebula_db_host: localhost

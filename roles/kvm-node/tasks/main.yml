@@ -4,6 +4,7 @@
   yum:
     name:
       - opennebula-node-kvm
+      - bridge-utils
     state: present
 
 - name: Restart libvirtd
@@ -30,21 +31,20 @@
   with_items:
     - messagebus.service
     - libvirtd.service
-
-- name: Replace ethernet configuration to enable bridge
-  template:
-    src: ethernet-config.j2
-    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ ansible_default_ipv4.interface }}"
-    backup: yes
     
 - name: Copy bridge configuration file
   template:
     src: bridge-config-dhcp.j2
-    dest: /etc/sysconfig/network-scripts/ifcfg-br0
+    dest: /etc/sysconfig/network-scripts/{{ BRIDGE_INTERFACE }}
+    owner: root
+    group: root
+    mode: 0755
     backup: yes
+  tags: vnet
     
 - name: Restart network service
   service: 
     name: network 
     state: restarted
+  tags: vnet
 
